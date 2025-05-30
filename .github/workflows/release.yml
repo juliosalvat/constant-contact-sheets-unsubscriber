@@ -4,6 +4,11 @@ on:
   release:
     types: [published]
   workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Release tag to upload assets to (e.g., v1.0.1)"
+        required: false
+        default: ""
 
 jobs:
   build-and-publish:
@@ -28,12 +33,28 @@ jobs:
       - name: Build package
         run: python -m build
 
-      - name: Upload release assets
+      - name: Upload release assets (auto release)
         if: github.event_name == 'release'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release upload ${{ github.event.release.tag_name }} dist/* --clobber
+
+      - name: Upload release assets (manual trigger)
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.release_tag != ''
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release upload ${{ github.event.inputs.release_tag }} dist/* --clobber
+
+      - name: Upload to latest release (manual trigger without tag)
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.release_tag == ''
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          LATEST_TAG=$(gh release list --limit 1 --json tagName --jq '.[0].tagName')
+          echo "Uploading to latest release: $LATEST_TAG"
+          gh release upload $LATEST_TAG dist/* --clobber
 
       - name: Publish to PyPI (if API token is available)
         if: github.event_name == 'release'
