@@ -56,6 +56,17 @@ jobs:
           echo "Uploading to latest release: $LATEST_TAG"
           gh release upload $LATEST_TAG dist/* --clobber
 
+      - name: Create GitHub Package-like visibility
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "📦 Package published to GitHub Release!"
+          echo "🔗 Download: https://github.com/${{ github.repository }}/releases"
+          echo "📋 Install instructions:"
+          echo "  pip install constant-contact-sheets-unsubscriber"
+          echo "  # OR download directly from:"
+          echo "  # https://github.com/${{ github.repository }}/releases/latest"
+
       - name: Publish to PyPI (if API token is available)
         if: github.event_name == 'release'
         env:
@@ -64,7 +75,7 @@ jobs:
         run: |
           if [ -n "$TWINE_PASSWORD" ]; then
             echo "Publishing to PyPI..."
-            twine upload dist/*
+            twine upload dist/* --skip-existing
           else
             echo "PYPI_API_TOKEN not set, skipping PyPI upload"
           fi
