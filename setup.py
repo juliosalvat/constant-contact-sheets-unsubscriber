@@ -16,12 +16,12 @@ with open("requirements.txt", "r", encoding="utf-8") as fh:
 setup(
     name="constant-contact-sheets-unsubscriber",
     version="1.0.0",
-    author="Your Name",
-    author_email="your.email@example.com",
+    author="Julio Salvat",
+    author_email="code@juliosalvat.com",
     description="Automatically unsubscribe emails from Constant Contact using Google Sheets integration",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/constant-contact-sheets-unsubscriber",
+    url="https://github.com/juliosalvat/constant-contact-sheets-unsubscriber",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 4 - Beta",
@@ -49,8 +49,8 @@ setup(
     zip_safe=False,
     keywords="constant-contact email unsubscribe google-sheets automation",
     project_urls={
-        "Bug Reports": "https://github.com/yourusername/constant-contact-sheets-unsubscriber/issues",
-        "Source": "https://github.com/yourusername/constant-contact-sheets-unsubscriber",
-        "Documentation": "https://github.com/yourusername/constant-contact-sheets-unsubscriber#readme",
+        "Bug Reports": "https://github.com/juliosalvat/constant-contact-sheets-unsubscriber/issues",
+        "Source": "https://github.com/juliosalvat/constant-contact-sheets-unsubscriber",
+        "Documentation": "https://github.com/juliosalvat/constant-contact-sheets-unsubscriber#readme",
     },
 ) 
