@@ -3,6 +3,8 @@
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+[![PyPI version](https://badge.fury.io/py/constant-contact-sheets-unsubscriber.svg)](https://badge.fury.io/py/constant-contact-sheets-unsubscriber)
+
 A Python package for automatically unsubscribing emails from Constant Contact using Google Sheets as the data source. Perfect for automating email list management and compliance.
 
 ## ✨ Features
@@ -17,8 +19,25 @@ A Python package for automatically unsubscribing emails from Constant Contact us
 
 ## 📦 Installation
 
+### From PyPI (Recommended)
+
 ```bash
 pip install constant-contact-sheets-unsubscriber
+```
+
+### From GitHub Releases
+
+```bash
+# Download the latest .whl file from releases and install
+pip install https://github.com/juliosalvat/constant-contact-sheets-unsubscriber/releases/latest/download/constant_contact_sheets_unsubscriber-1.0.1-py3-none-any.whl
+```
+
+### From Source
+
+```bash
+git clone https://github.com/juliosalvat/constant-contact-sheets-unsubscriber.git
+cd constant-contact-sheets-unsubscriber
+pip install -e .
 ```
 
 ## 🔧 Quick Setup
@@ -156,76 +175,7 @@ python -c "import json; print(f'Processed: {len(json.load(open(\"processed_email
 
 ## ⚙️ Configuration Options
 
-| Environment Variable      | Default                       | Description                  |
-| ------------------------- | ----------------------------- | ---------------------------- |
-| `RATE_LIMIT_SECONDS`      | 5                             | Seconds between API requests |
-| `CHECK_INTERVAL_SECONDS`  | 300                           | Seconds between sheet checks |
-| `PROCESSED_EMAILS_FILE`   | `processed_emails.json`       | Tracking file path           |
-| `SUCCESS_LOG_FILE`        | `unsubscribe_success_log.txt` | Success log path             |
-| `GOOGLE_CREDENTIALS_FILE` | `credentials.json`            | Google API credentials       |
+| Environment Variable | Default | Description |
+| -------------------- | ------- | ----------- |
 
-## 🔒 Security
-
-- All sensitive credentials are stored in environment variables
-- Google Service Account uses minimal required permissions
-- Rate limiting prevents API abuse
-- No sensitive data is logged or tracked in version control
-
-## 🐛 Troubleshooting
-
-### Common Issues
-
-**"ModuleNotFoundError: No module named 'dotenv'"**
-
-```bash
-pip install python-dotenv
-```
-
-**"Error: CONSTANT_CONTACT_API_KEY not found"**
-
-- Check your `.env` file exists and has the correct variables
-- Ensure the `.env` file is in your working directory
-
-**"Permission denied" for Google Sheets**
-
-- Verify the service account email has access to your spreadsheet
-- Check the `credentials.json` file exists and is valid
-
-**"Contact not found" for all emails**
-
-- Verify emails exist in your Constant Contact account
-- Check API credentials are correct and have proper permissions
-
-### Debug Mode
-
-```bash
-# Enable debug logging
-export LOG_LEVEL=DEBUG
-cc-unsubscriber --spreadsheet-id "your_id" --range "Sheet1!B:B"
-```
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- [Constant Contact API](https://developer.constantcontact.com/) for email management
-- [Google Sheets API](https://developers.google.com/sheets/api) for spreadsheet integration
-- Built with Python and love ❤️
-
-## 📞 Support
-
-- 📋 [Issue Tracker](https://github.com/yourusername/constant-contact-sheets-unsubscriber/issues)
-- 📖 [Documentation](https://github.com/yourusername/constant-contact-sheets-unsubscriber#readme)
-- 💬 [Discussions](https://github.com/yourusername/constant-contact-sheets-unsubscriber/discussions)
+| `RATE_LIMIT_SECONDS`
